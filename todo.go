@@ -3,7 +3,6 @@ package todo
 import (
 	"encoding/json"
 	"errors"
-	"io/ioutil"
 	"os"
 	"time"
 )
@@ -50,7 +49,7 @@ func (t *Todos) Delete(id int) error {
 }
 
 func (t *Todos) Load(filename string) error {
-	file, err := ioutil.ReadFile(filename)
+	file, err := os.ReadFile(filename)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) {
 			return nil
@@ -77,5 +76,5 @@ func (t *Todos) Store(filename string) error {
 		return err
 	}
 
-	return ioutil.WriteFile(filename, data, 0644)
+	return os.WriteFile(filename, data, 0644)
 }
