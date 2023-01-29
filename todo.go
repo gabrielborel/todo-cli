@@ -63,6 +63,19 @@ func (t *Todos) Load(filename string) error {
 		return err
 	}
 
-	err = json.Unmarshal(file, &t)
+	err = json.Unmarshal(file, t)
+	if err != nil {
+		return err
+	}
 
+	return nil
+}
+
+func (t *Todos) Store(filename string) error {
+	data, err := json.Marshal(t)
+	if err != nil {
+		return err
+	}
+
+	return ioutil.WriteFile(filename, data, 0644)
 }
