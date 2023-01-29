@@ -28,23 +28,23 @@ func (t *Todos) Add(task string) {
 }
 
 func (t *Todos) Complete(id int) error {
-	ls := *t
-	if id <= 0 || id > len(ls) {
+	list := *t
+	if id <= 0 || id > len(list) {
 		return errors.New("invalid index")
 	}
 
-	ls[id-1].CompletedAt = time.Now()
-	ls[id-1].Done = true
+	list[id-1].CompletedAt = time.Now()
+	list[id-1].Done = true
 	return nil
 }
 
 func (t *Todos) Delete(id int) error {
-	ls := *t
-	if id <= 0 || id > len(ls) {
+	list := *t
+	if id <= 0 || id > len(list) {
 		return errors.New("invalid index")
 	}
 
-	*t = append(ls[:id-1], ls[id:]...)
+	*t = append(list[:id-1], list[id:]...)
 	return nil
 }
 
